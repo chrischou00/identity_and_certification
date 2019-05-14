@@ -1,4 +1,4 @@
-pragma solidity ^0.4.17;
+pragma solidity ^0.5.0;
 
 contract Adoption {
   address[16] public adopters;
@@ -14,7 +14,7 @@ contract Adoption {
     return petId;
   }
 
-  function getAdopters() public view returns (address[16]) {
+  function getAdopters() public view returns (address[16] memory) {
     return adopters;
   }
 }
