@@ -3,27 +3,6 @@ App = {
   contracts: {},
 
   init: async function () {
-
-    fetch('pets.json')
-      .then(function (res) {
-        return res.json();
-      })
-      .then(function (data) {
-        var petsRow = $('#petsRow');
-        var petTemplate = $('#petTemplate');
-
-        for (i = 0; i < data.length; i++) {
-          petTemplate.find('.panel-title').text(data[i].name);
-          petTemplate.find('img').attr('src', data[i].picture);
-          petTemplate.find('.pet-breed').text(data[i].breed);
-          petTemplate.find('.pet-age').text(data[i].age);
-          petTemplate.find('.pet-location').text(data[i].location);
-          petTemplate.find('.btn-adopt').attr('data-id', data[i].id);
-
-          petsRow.append(petTemplate.html());
-        }
-      });
-
     return await App.initWeb3();
   },
 
@@ -64,7 +43,16 @@ App = {
         // 執行 App.markAdopted() 函示
         return App.markAdopted();
       });
-
+    fetch('giving.json')
+      .then(function(res) {
+        return res.json();
+      })
+      .then(function(data){
+        var GiveArtifact = data;
+        App.contracts.Give = TruffleContract(GiveArtifact);
+        App.contracts.Give.setProvider(App.web3Provider);
+        
+      })
     return App.bindEvents();
   },
 
@@ -101,14 +89,21 @@ App = {
         console.log(error);
       }
       var account = accounts[0];
-      App.contracts.Adoption.deployed().then(function (instance) {
+      /*App.contracts.Adoption.deployed().then(function (instance) {
         adoptionInstance = instance;
         // 建立一筆交易，執行智能合約的 adopt 函式
         return adoptionInstance.adopt(petId, {
           from: account
+        });*/
+      App.contracts.Give.deployed().then(function (instance) {
+        adoptionInstance = instance;
+        // 建立一筆交易，執行智能合約的 adopt 函式
+         var k =  adoptionInstance.checkPermission(account, {
+           from: account
         });
       }).then(function (result) {
         // console.log(result);
+        console.log(k);
         return App.markAdopted();
       }).catch(function (err) {
         console.log(err.message);
