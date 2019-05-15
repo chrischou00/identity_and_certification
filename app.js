@@ -3,6 +3,23 @@ App = {
   contracts: {},
 
   init: async function () {
+    fetch('pets.json')
+      .then(function (res) {
+        return res.json();
+      })
+      .then(function (data) {
+       var petsRow = $('#petsRow');
+        var petTemplate = $('#petTemplate');
+        for (i = 0; i < data.length; i++) {
+          petTemplate.find('.panel-title').text(data[i].name);
+          petTemplate.find('img').attr('src', data[i].picture);
+          petTemplate.find('.pet-breed').text(data[i].breed);
+          petTemplate.find('.pet-age').text(data[i].age);
+          petTemplate.find('.pet-location').text(data[i].location);
+          petTemplate.find('.btn-adopt').attr('data-id', data[i].id);
+          petsRow.append(petTemplate.html());
+        }
+      });
     return await App.initWeb3();
   },
 
@@ -98,12 +115,14 @@ App = {
       App.contracts.Give.deployed().then(function (instance) {
         adoptionInstance = instance;
         // 建立一筆交易，執行智能合約的 adopt 函式
-         var k =  adoptionInstance.checkPermission(account, {
+         return adoptionInstance.checkPermission(account, {
            from: account
-        });
+        })
+        .then(function(result){
+          console.log(result);
+        })
       }).then(function (result) {
         // console.log(result);
-        console.log(k);
         return App.markAdopted();
       }).catch(function (err) {
         console.log(err.message);
