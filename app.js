@@ -115,12 +115,8 @@ App = {
       App.contracts.Give.deployed().then(function (instance) {
         adoptionInstance = instance;
         // 建立一筆交易，執行智能合約的 adopt 函式
-         return adoptionInstance.checkPermission(account, {
-           from: account
-        })
-        .then(function(result){
-          console.log(result);
-        })
+        console.log(account);
+         return adoptionInstance.checkPermission(account);
       }).then(function (result) {
         // console.log(result);
         return App.markAdopted();
