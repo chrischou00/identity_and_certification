@@ -74,21 +74,22 @@ App = {
   },
 
   AskPermission: function(){
-    console.log("kk");
-    var k = document.getElementById("myText").value;
+    var k = document.getElementById("daily").value;
     var deployed;
-    console.log(k);
-    App.contracts.Give.deployed().then(function(instance){
-      deployed = instance;
-      return instance.trans(k);
+    web3.eth.getAccounts(function(error, accounts){
+      if(error)
+        console.log(error);
+      var account = accounts[0];
+      App.contracts.Give.deployed().then(function(instance){
+        deployed = instance;
+        return instance.trans(k, {from: account, value: 10*k});
+      })
+      .then(function(result){
+        console.log(result);
+        alert("Success!!");
+      })
     })
-    .then(function(result){
-      console.log(result);
-      alert("Success!!");
-    })
-    .catch(function(err){
-      console.log(err);
-    })
+    
   },
 
   OpenDoor: function(){
@@ -97,7 +98,6 @@ App = {
          console.log(error);
       var account = accounts[0];
       App.contracts.Give.deployed().then(function(instance){
-        console.log(account);
         return instance.checkPermission(0, {from:account});
       })
       .then(function(result){

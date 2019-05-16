@@ -29,11 +29,17 @@
   <body>
     <h1 class="text-center">Transfer Testing</h1><br><br>
     <div class = "text-center">
-       Give Permission:
-      <input type="text" id="myText" value="">
-      <button type="button" class="btn btn-default" id="ttbtn" onclick="App.AskPermission()">Click ME</button>
-      <br><br>
+      Please Choose the number of days you want to rent:<br>
+      <select id = "daily">
+        <option value = "1">1 day</option>
+        <option value = "3">3 days</option>
+        <option value = "7">7 days</option>
+      </select>
+      <button type="button" class="btn btn-default" id="ttbtn" onclick="App.AskPermission()">Ask Permission</button>
+      <br><br><br>
       <button type="button" class="btn btn-default" id="ttbtn" onclick="App.OpenDoor()">Open the door</button>
+
+     <!-- <button type="button" class="btn btn-default" id="ttbtn" onclick="App.showMaster()">Show</button>-->
 
     </div>
   </body>
