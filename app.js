@@ -82,7 +82,7 @@ App = {
       var account = accounts[0];
       App.contracts.Give.deployed().then(function(instance){
         deployed = instance;
-        return instance.trans(k, {from: account, value: 10*k});
+        return instance.trans(k, {from: account, value: 100000000000000000*k});
       })
       .then(function(result){
         console.log(result);
