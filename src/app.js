@@ -3,15 +3,13 @@ App = {
   contracts: {},
 
   init: async function () {
-
-    fetch('pets.json')
+    /*fetch('pets.json')
       .then(function (res) {
         return res.json();
       })
       .then(function (data) {
-        var petsRow = $('#petsRow');
+       var petsRow = $('#petsRow');
         var petTemplate = $('#petTemplate');
-
         for (i = 0; i < data.length; i++) {
           petTemplate.find('.panel-title').text(data[i].name);
           petTemplate.find('img').attr('src', data[i].picture);
@@ -19,11 +17,9 @@ App = {
           petTemplate.find('.pet-age').text(data[i].age);
           petTemplate.find('.pet-location').text(data[i].location);
           petTemplate.find('.btn-adopt').attr('data-id', data[i].id);
-
           petsRow.append(petTemplate.html());
         }
-      });
-
+      });*/
     return await App.initWeb3();
   },
 
@@ -51,7 +47,7 @@ App = {
   // Step 2：實例化智能合約
   initContract: function () {
 
-    fetch('Adoption.json')
+    /*fetch('Adoption.json')
       .then(function (res) {
         return res.json();
       })
@@ -63,15 +59,56 @@ App = {
         App.contracts.Adoption.setProvider(App.web3Provider);
         // 執行 App.markAdopted() 函示
         return App.markAdopted();
+      });*/
+    fetch('giving.json')
+      .then(function(res) {
+        return res.json();
+      })
+      .then(function(data){
+        var GiveArtifact = data;
+        App.contracts.Give = TruffleContract(GiveArtifact);
+        App.contracts.Give.setProvider(App.web3Provider);
+        
       });
-
-    return App.bindEvents();
+    //return App.bindEvents();
   },
 
-  bindEvents: function () {
-    $(document).on('click', '.btn-adopt', App.handleAdopt);
+  AskPermission: function(){
+    var k = document.getElementById("daily").value;
+    var deployed;
+    web3.eth.getAccounts(function(error, accounts){
+      if(error)
+        console.log(error);
+      var account = accounts[0];
+      App.contracts.Give.deployed().then(function(instance){
+        deployed = instance;
+        return instance.trans(k, {from: account, value: 100000000000000000*k});
+      })
+      .then(function(result){
+        console.log(result);
+        alert("Success!!");
+      })
+    })
+    
   },
 
+  OpenDoor: function(){
+    web3.eth.getAccounts(function(error, accounts){
+      if(error)
+         console.log(error);
+      var account = accounts[0];
+      App.contracts.Give.deployed().then(function(instance){
+        return instance.checkPermission(0, {from:account});
+      })
+      .then(function(result){
+        if(result.logs[0].event=="OpenDoor")
+        {
+          alert("OpenDoor!");
+        }
+      })
+    })
+  }
+  /*
   // 標記已經被領養的寵物
   markAdopted: function () { // Step 3
     var adoptionInstance;
@@ -89,9 +126,9 @@ App = {
     }).catch(function (err) {
       console.log(err.message);
     });
-  },
+  },*/
 
-  handleAdopt: function (event) { // Step 4
+  /*handleAdopt: function (event) { // Step 4
     event.preventDefault();
     var petId = parseInt($(event.target).data('id'));
     var adoptionInstance;
@@ -107,6 +144,11 @@ App = {
         return adoptionInstance.adopt(petId, {
           from: account
         });
+      App.contracts.Give.deployed().then(function (instance) {
+        adoptionInstance = instance;
+        // 建立一筆交易，執行智能合約的 adopt 函式
+        console.log(account);
+         return adoptionInstance.checkPermission(account);
       }).then(function (result) {
         // console.log(result);
         return App.markAdopted();
@@ -114,7 +156,7 @@ App = {
         console.log(err.message);
       });
     });
-  }
+  }*/
 
 };
 
