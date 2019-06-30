@@ -107,7 +107,7 @@ App = {
         return instance.getAttribute(target, id, {gas: 30000});
       })
       .then(function(result){
-        cont.innerHTML = "123";
+        cont.innerHTML = result;
       })
       .catch(function(err){
         cont.innerHTML = "PEGE";
