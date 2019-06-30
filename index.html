@@ -32,6 +32,7 @@
     <p class="text-center">It's a system for users to manager their own attribute and sign others' attribute!</p>
     <br>
     <div class = "text-center" id = "add_data">
+      <h1>Attribute</h1>
       Any thing can be an attribute and store into the space which is already, but here are some rules:<br>
       <br>1. Attribute can't change name and be deleted, think before create.<br>
       2. Every attribute must be updated in 30 days.<br>
@@ -59,7 +60,13 @@
 
     </div>
     <div class = "text-center" id = "add_sign">
-      <p>feagewa</p>
+      <h1>Sign</h1>
+      You can "sign" the other's attribute to represent your trust, but you must send deposit to sign it.<br>
+      But if the attribute didn't update in time, you won't get your money back! <br>
+      You must be sure the address you sign is worth to trust.<br>
+      Target Address: <input type="text" id="sign_target"><br><br>
+      Attribute ID:<input type="text" id="sign_id"><br><br>
+      <button type="button" class="btn btn-default" id="ttbtn" onclick="App.Sign()">Sign</button>
     </div>
   </body>
 

@@ -124,6 +124,23 @@ App = {
     })
   },
 
+  Sign: function(){
+    var sign_id = document.getElementById("sign_id").value;
+    var target = document.getElementById("sign_target").value;
+    web3.eth.getAccounts(function(error, accounts){
+      if(error)
+         console.log(error);
+      var account = accounts[0];
+      App.contracts.Cert.deployed().then(function(instance){
+        console.log(time_id, data);
+        return instance.updateAttribute( target ,sign_id, {from: account, gas: 500000});
+      })
+      .then(function(result){
+        alert("Sign successful!");
+      })
+    })
+  },
+
   updateAttribute: function(){
     var time_id = document.getElementById("time_id").value;
     var data = document.getElementById("update_data").value;
