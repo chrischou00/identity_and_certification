@@ -132,7 +132,7 @@ App = {
          console.log(error);
       var account = accounts[0];
       App.contracts.Cert.deployed().then(function(instance){
-        return instance.extendTime(id, {frome: account, gas: 500000});
+        return instance.extendTime(time_id, {frome: account, gas: 500000});
       })
       .then(function(result){
         var date1 = new Date(result[0]*1000);
