@@ -96,20 +96,20 @@ App = {
   ShowAttribute: function(){
     var target = document.getElementById("target").value;
     var id = document.getElementById("attr_id").value;
-    var cont = document.getElementById("cont").innerHTML;
+    var cont = document.getElementById("cont");
     web3.eth.getAccounts(function(error, accounts){
       if(error)
          console.log(error);
       var account = accounts[0];
       App.contracts.Cert.deployed().then(function(instance){
-        cont = "pw";
+        cont.innerHTML = "pw";
         return instance.getAttribute(target, id);
       })
       .then(function(result){
-          cont = "123";
+        cont.innerHTML = "123";
       })
       .catch(function(err){
-          cont = "QQ";
+        cont.innerHTML = "PEGE";
       })
     })
   }
