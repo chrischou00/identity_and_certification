@@ -143,6 +143,7 @@ App = {
                          "And you should spend money to finish extend.<br>"+"There is a free extend between 'Duration Time' and 'Update Time'.<br>"
                          + "Duration Number: "+ date1.toString()+"<br>"+"Duration Time: "+date2.toString()+"<br>"+"Update Time: "+date3.toString()+"<br>";
       })
+    })
   }
   /*
   // 標記已經被領養的寵物
