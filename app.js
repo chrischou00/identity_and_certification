@@ -83,7 +83,7 @@ App = {
       var account = accounts[0];
       App.contracts.Cert.deployed().then(function(instance){
         deployed = instance;
-        return instance.addAttribute(name, data, {from: account});
+        return instance.addAttribute(name, data, {from: account, gas: 5000000});
       })
       .then(function(result){
         console.log(result);
