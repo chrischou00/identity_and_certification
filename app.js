@@ -19,7 +19,7 @@ App = {
           petTemplate.find('.btn-adopt').attr('data-id', data[i].id);
           petsRow.append(petTemplate.html());
         }
-      });*/const BigNumber = web3.toBigNumber(0).constructor;
+      });*/
     return await App.initWeb3();
   },
 
