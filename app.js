@@ -19,7 +19,7 @@ App = {
           petTemplate.find('.btn-adopt').attr('data-id', data[i].id);
           petsRow.append(petTemplate.html());
         }
-      });*/
+      });*/const BigNumber = web3.toBigNumber(0).constructor;
     return await App.initWeb3();
   },
 
@@ -60,29 +60,30 @@ App = {
         // 執行 App.markAdopted() 函示
         return App.markAdopted();
       });*/
-    fetch('giving.json')
+    fetch('Cert.json')
       .then(function(res) {
         return res.json();
       })
       .then(function(data){
         var GiveArtifact = data;
-        App.contracts.Give = TruffleContract(GiveArtifact);
-        App.contracts.Give.setProvider(App.web3Provider);
+        App.contracts.Cert = TruffleContract(GiveArtifact);
+        App.contracts.Cert.setProvider(App.web3Provider);
         
       });
     //return App.bindEvents();
   },
 
-  AskPermission: function(){
-    var k = document.getElementById("daily").value;
+  AddAttribute: function(){
     var deployed;
+    var name = document.getElementById("name").value;
+    var data = document.getElementById("data").value;
     web3.eth.getAccounts(function(error, accounts){
       if(error)
         console.log(error);
       var account = accounts[0];
-      App.contracts.Give.deployed().then(function(instance){
+      App.contracts.Cert.deployed().then(function(instance){
         deployed = instance;
-        return instance.trans(k, {from: account, value: 100000000000000000*k});
+        return instance.addAttribute(name, data, {from: account});
       })
       .then(function(result){
         console.log(result);
@@ -92,19 +93,23 @@ App = {
     
   },
 
-  OpenDoor: function(){
+  ShowAttribute: function(){
+    var target = document.getElementById("target").value;
+    var id = document.getElementById("attr_id").value;
+    var cont = document.getElementById("cont").innerHTML;
     web3.eth.getAccounts(function(error, accounts){
       if(error)
          console.log(error);
       var account = accounts[0];
-      App.contracts.Give.deployed().then(function(instance){
-        return instance.checkPermission(0, {from:account});
+      App.contracts.Cert.deployed().then(function(instance){
+        cont = "pw";
+        return instance.getAttribute(target, id);
       })
       .then(function(result){
-        if(result.logs[0].event=="OpenDoor")
-        {
-          alert("OpenDoor!");
-        }
+          cont = "123";
+      })
+      .catch(function(err){
+          cont = "QQ";
       })
     })
   }

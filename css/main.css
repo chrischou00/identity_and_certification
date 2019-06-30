@@ -1,0 +1,15 @@
+#add_data{
+    width: 45rem;
+    height: 100%;
+    margin-left: 5rem;
+    margin-right: 10rem;
+    float:left;
+}
+
+#add_sign{
+    width: 45rem;
+    height: 100%;
+    float: right;
+    margin-left: 10rem;
+    margin-right: 5rem;
+}
