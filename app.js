@@ -117,8 +117,8 @@ App = {
         // Will display time in 10:30:23 format
         var formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
 
-        cont.innerHTML = "Attribute name: " + result[0] + "\n" + "Attribute data: "+result[1]+"\n"+
-                         "Extend deadline: "+ formattedTime + "\n" + "Signature num: " + result[3]+"\n";
+        cont.innerHTML = "Attribute type: " + result[0] + "<br>" + "Attribute data: "+result[1]+"<br>"+
+                         "Extend deadline: "+ formattedTime + "<br>" + "Signature num: " + result[3]+"<br>";
       })
       .catch(function(err){
         cont.innerHTML = "PEGE";
