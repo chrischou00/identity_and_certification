@@ -97,6 +97,7 @@ App = {
     var target = document.getElementById("target").value;
     var id = document.getElementById("attr_id").value;
     var cont = document.getElementById("cont");
+    console.log('k');
     web3.eth.getAccounts(function(error, accounts){
       if(error)
          console.log(error);
