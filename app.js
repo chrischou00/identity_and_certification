@@ -104,7 +104,7 @@ App = {
       var account = accounts[0];
       App.contracts.Cert.deployed().then(function(instance){
         cont.innerHTML = "pw";
-        return instance.getAttribute(target, id, {gas: 5000000});
+        return instance.getAttribute(target, id, {gas: 50000});
       })
       .then(function(result){
         cont.innerHTML = result[0];
