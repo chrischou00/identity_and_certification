@@ -137,7 +137,7 @@ App = {
       .then(function(result){
         App.contracts.Cert.deployed().then(function(instance){
           console.log(result);
-          console.log(result*5);
+          console.log(result*100000000000000000);
           console.log(result.toString());
           return instance.extendTime(time_id, {from: account, gas: 500000, value: result*100000000000000000});
         })
