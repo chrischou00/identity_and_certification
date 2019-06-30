@@ -123,6 +123,22 @@ App = {
       })
     })
   },
+
+  updateAttribute: function(){
+    var time_id = document.getElementById("time_id").value;
+    var data = document.getElementById("update_data").value;
+
+    web3.eth.getAccounts(function(error, accounts){
+      if(error)
+         console.log(error);
+      var account = accounts[0];
+      App.contracts.Cert.deployed().then(function(instance){
+        return instance.updateAttribute( time_id, data, {gas: 50000});
+      })
+      .then(function(result){
+        alert("update successful!");
+      })
+  },
   
   Extend_time: function(){
     var time_id = document.getElementById("time_id").value;
