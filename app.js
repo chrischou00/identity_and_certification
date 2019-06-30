@@ -132,33 +132,26 @@ App = {
          console.log(error);
       var account = accounts[0];
       App.contracts.Cert.deployed().then(function(instance){
-        return instance.extendTime(time_id, {frome: account, gas: 500000});
+         return instance.need(time_id, {from: account, gas:500000});
       })
       .then(function(result){
-        console.log(result);
-        var date2 = new Date(result[1]*1000);
-        var hours = date2.getHours();
-        // Minutes part from the timestamp
-        var minutes = "0" + date2.getMinutes();
-        // Seconds part from the timestamp
-        var seconds = "0" + date2.getSeconds();
-
-        // Will display time in 10:30:23 format
-        var formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
-        
-        var date3 = new Date(result[2]*1000);
-        var hours2 = date3.getHours();
-        // Minutes part from the timestamp
-        var minutes2 = "0" + date3.getMinutes();
-        // Seconds part from the timestamp
-        var seconds2 = "0" + date3.getSeconds();
-
-        // Will display time in 10:30:23 format
-        var formattedTime2 = hours2 + ':' + minutes2.substr(-2) + ':' + seconds2.substr(-2);
-        
-        cont.innerHTML = "If you keep extend this attribute time before 'Duration Time', 'Duration Number' grows.<br>"+
-                         "And you should spend money to finish extend.<br>"+"There is a free extend between 'Duration Time' and 'Update Time'.<br>"
-                         + "Duration Number: "+ result[0]+"<br>"+"Duration Time: "+date2.toString()+"<br>"+"Update Time: "+date3.toString()+"<br>";
+        App.contracts.Cert.deployed().then(function(instance){
+          return instance.extendTime(time_id, {from: account, gas: 500000});
+        })
+        .then(function(result){
+          App.contracts.Cert.deployed().then(function(instance){
+            return instance.show_after(time_id, {from: account, gas: 500000});
+          })
+          .then(function(result){
+            console.log(result);
+            var date2 = new Date(result[1]*1000);
+            var date3 = new Date(result[2]*1000);
+                    
+            cont.innerHTML = "If you keep extend this attribute time before 'Duration Time', 'Duration Number' grows.<br>"+
+                            "And you should spend money to finish extend.<br>"+"There is a free extend between 'Duration Time' and 'Update Time'.<br>"
+                            + "Duration Number: "+ result[0]+"<br>"+"Duration Time: "+date2.toString()+"<br>"+"Update Time: "+date3.toString()+"<br>";
+          })
+        })
       })
     })
   }
