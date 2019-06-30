@@ -138,6 +138,7 @@ App = {
       .then(function(result){
         alert("update successful!");
       })
+    })
   },
   
   Extend_time: function(){
