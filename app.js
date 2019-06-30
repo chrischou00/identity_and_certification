@@ -101,7 +101,7 @@ App = {
       var account = accounts[0];
       console.log(sign_id, target)
       App.contracts.Cert.deployed().then(function(instance){
-        return instance.revokeSignature( target ,sign_id, {from: account, gas: 50000000});
+        return instance.revokeSignature( target ,sign_id, {from: account, gas: 8000000});
       })
       .then(function(result){
         alert("Successful!");
