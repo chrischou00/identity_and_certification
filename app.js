@@ -122,6 +122,27 @@ App = {
         cont.innerHTML = "Error!";
       })
     })
+  },
+  
+  Extend_time: function(){
+    var time_id = document.getElementById("time_id").value;
+    var cont = document.getElementById("cont2");
+    web3.eth.getAccounts(function(error, accounts){
+      if(error)
+         console.log(error);
+      var account = accounts[0];
+      App.contracts.Cert.deployed().then(function(instance){
+        return instance.extendTime(id, {frome: account, gas: 500000});
+      })
+      .then(function(result){
+        var date1 = new Date(result[0]*1000);
+        var date2 = new Date(result[1]*1000);
+        var date3 = new Date(result[2]*1000);
+        
+        cont.innerHTML = "If you keep extend this attribute time before 'Duration Time', 'Duration Number' grows.<br>"+
+                         "And you should spend money to finish extend.<br>"+"There is a free extend between 'Duration Time' and 'Update Time'.<br>"
+                         + "Duration Number: "+ date1.toString()+"<br>"+"Duration Time: "+date2.toString()+"<br>"+"Update Time: "+date3.toString()+"<br>";
+      })
   }
   /*
   // 標記已經被領養的寵物
