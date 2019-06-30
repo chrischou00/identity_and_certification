@@ -97,13 +97,11 @@ App = {
     var target = document.getElementById("target").value;
     var id = document.getElementById("attr_id").value;
     var cont = document.getElementById("cont");
-    console.log('k');
     web3.eth.getAccounts(function(error, accounts){
       if(error)
          console.log(error);
       var account = accounts[0];
       App.contracts.Cert.deployed().then(function(instance){
-        cont.innerHTML = "pw";
         return instance.getAttribute(target, id, {gas: 50000});
       })
       .then(function(result){
@@ -118,10 +116,10 @@ App = {
         var formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
 
         cont.innerHTML = "Attribute type: " + result[0] + "<br>" + "Attribute data: "+result[1]+"<br>"+
-                         "Extend deadline: "+ formattedTime + "<br>" + "Signature num: " + result[3]+"<br>";
+                         "Extend deadline: "+ date.toString() + "<br>" + "Signature num: " + result[3]+"<br>";
       })
       .catch(function(err){
-        cont.innerHTML = "PEGE";
+        cont.innerHTML = "Error!";
       })
     })
   }
