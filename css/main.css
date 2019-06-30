@@ -1,5 +1,5 @@
 #add_data{
-    width: 40rem;
+    width: 60rem;
     height: 100%;
     margin-left: 5rem;
     margin-right: 10rem;
@@ -7,7 +7,7 @@
 }
 
 #add_sign{
-    width: 40rem;
+    width: 55rem;
     height: 100%;
     float: right;
     margin-left: 10rem;

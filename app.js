@@ -92,6 +92,22 @@ App = {
     })
     
   },
+  revoke: function(){
+    var sign_id = document.getElementById("sign_id").value;
+    var target = document.getElementById("sign_target").value;
+    web3.eth.getAccounts(function(error, accounts){
+      if(error)
+         console.log(error);
+      var account = accounts[0];
+      console.log(sign_id, target)
+      App.contracts.Cert.deployed().then(function(instance){
+        return instance.revokeSignature( target ,sign_id, {from: account, gas: 5000000});
+      })
+      .then(function(result){
+        alert("Successful!");
+      })
+    })
+  },
 
   ShowAttribute: function(){
     var target = document.getElementById("target").value;
@@ -131,8 +147,9 @@ App = {
       if(error)
          console.log(error);
       var account = accounts[0];
+      console.log(sign_id, target)
       App.contracts.Cert.deployed().then(function(instance){
-        return instance.Sign( target ,sign_id, {from: account, gas: 500000, value: 100000000000000000});
+        return instance.Sign( target ,sign_id, {from: account, gas: 5000000, value: 100000000000000000});
       })
       .then(function(result){
         alert("Sign successful!");

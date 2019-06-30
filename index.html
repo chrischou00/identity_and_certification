@@ -64,9 +64,12 @@
       You can "sign" the other's attribute to represent your trust, but you must send deposit to sign it.<br>
       But if the attribute didn't update in time, you won't get your money back! <br>
       You must be sure the address you sign is worth to trust.<br>
+      You can cancel your signatures, and if the attribute still work well at that time,<br>
+      you can get your deposit back.<br><br>
       Target Address: <input type="text" id="sign_target"><br><br>
       Attribute ID:<input type="text" id="sign_id"><br><br>
       <button type="button" class="btn btn-default" id="ttbtn" onclick="App.Sign()">Sign</button>
+      <button type="button" class="btn btn-default" id="ttbtn" onclick="App.revoke()">Revoke Signature</button><br><br>
     </div>
   </body>
 
