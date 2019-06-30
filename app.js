@@ -133,7 +133,8 @@ App = {
          console.log(error);
       var account = accounts[0];
       App.contracts.Cert.deployed().then(function(instance){
-        return instance.updateAttribute( time_id, data, {gas: 50000});
+        console.log(time_id, data);
+        return instance.updateAttribute( time_id, data, {from: account, gas: 500000});
       })
       .then(function(result){
         alert("update successful!");
