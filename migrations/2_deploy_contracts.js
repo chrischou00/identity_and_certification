@@ -1,7 +1,7 @@
-var Adoption = artifacts.require("Adoption");
-var power = artifacts.require("giving");
 
-module.exports = function (deployer) {
+const Cert = artifacts.require("Cert");
 
-  deployer.deploy(power);
+module.exports = function(deployer) {
+  deployer.deploy(Cert);
+
 };

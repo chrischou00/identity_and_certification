@@ -6,10 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Power Transfer</title>
+    <title>Personal Identity</title>
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -27,20 +28,48 @@
   </head>
 
   <body>
-    <h1 class="text-center">Transfer Testing</h1><br><br>
-    <div class = "text-center">
-      Please Choose the number of days you want to rent:<br>
-      <select id = "daily">
-        <option value = "1">1 day</option>
-        <option value = "3">3 days</option>
-        <option value = "7">7 days</option>
-      </select>
-      <button type="button" class="btn btn-default" id="ttbtn" onclick="App.AskPermission()">Ask Permission</button>
+    <h1 class="text-center">Identity and Sign</h1><br><br>
+    <p class="text-center">It's a system for users to manager their own attribute and sign others' attribute!</p>
+    <br>
+    <div class = "text-center" id = "add_data">
+      <h1>Attribute</h1>
+      Any thing can be an attribute and store into the space which is already, but here are some rules:<br>
+      <br>1. Attribute can't change name and be deleted, think before create.<br>
+      2. Every attribute must be updated in 30 days.<br>
+      Attribute name: <input type = "text" id = "name"><br><br>
+      Data:<input type="text" id="data"><br><br>
+      <button type="button" class="btn btn-default" id="ttbtn" onclick="App.AddAttribute()">Add Attribute</button>
       <br><br><br>
-      <button type="button" class="btn btn-default" id="ttbtn" onclick="App.OpenDoor()">Open the door</button>
-
+      You can see other's attribute if you know his/her Ethereum address.<br>
+      Key in the address and ID number, you can get information. <br>
+      ps. ID number is the sequence when the attribute is created.<br>
+      Target Address: <input type = "text" id = "target"><br><br>
+      Attribute ID:<input type="text" id="attr_id"><br><br>
+      <button type="button" class="btn btn-default" id="ttbtn" onclick="App.ShowAttribute()">Show Attribute</button>
+      <br><p id="cont"></p>
+      <br><br>
+      The "Extend Time" button is used to extend time of Attribute. <br>
+      If the owner didn't extend, the attribute can't be access, and signers' deposit will be confiscated.<br>
+      If you want to modify your attribute, you can press "Update Attribute" button, but should beware, the attribute will be reset.(Signatures will be cleared)<br>
      <!-- <button type="button" class="btn btn-default" id="ttbtn" onclick="App.showMaster()">Show</button>-->
+      Attribute ID:<input type="text" id="time_id"><br><br>
+      Update Data:<input type="text" id="update_data"><br><br>
+      <button type="button" class="btn btn-default" id="ttbtn" onclick="App.Extend_time()">Extend Time</button>
+      <button type="button" class="btn btn-default" id="ttbtn" onclick="App.updateAttribute()">Update Attribute</button>
+      <br><br><p id="cont2"></p>
 
+    </div>
+    <div class = "text-center" id = "add_sign">
+      <h1>Sign</h1>
+      You can "sign" the other's attribute to represent your trust, but you must send deposit to sign it.<br>
+      But if the attribute didn't update in time, you won't get your money back! <br>
+      You must be sure the address you sign is worth to trust.<br>
+      You can cancel your signatures, and if the attribute still work well at that time,<br>
+      you can get your deposit back.<br><br>
+      Target Address: <input type="text" id="sign_target"><br><br>
+      Attribute ID:<input type="text" id="sign_id"><br><br>
+      <button type="button" class="btn btn-default" id="ttbtn" onclick="App.Sign()">Sign</button>
+      <button type="button" class="btn btn-default" id="ttbtn" onclick="App.revoke()">Revoke Signature</button><br><br>
     </div>
   </body>
 
